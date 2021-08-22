@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <libgen.h>
 #include <unistd.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
@@ -387,6 +388,9 @@ drawtext(const char *text, XftColor col[ColLast])
 	XFillRectangles(dpy, dc.drawable, dc.gc, &r, 1);
 	if (!text)
 		return;
+
+  /* filename only */
+  text = basename((char *) text);
 
 	olen = strlen(text);
 	h = dc.font.ascent + dc.font.descent;
